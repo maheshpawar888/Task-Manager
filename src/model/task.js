@@ -1,22 +1,24 @@
 const mongoose = require('mongoose');
+const User = require('./user');
 
 const taskSchema = new mongoose.Schema({
-    description:{
+    taskName:{
         type:String,
         trim:true,
         required:true
     },
-    completed:{
-        type:Boolean,
-        default:false
+    status:{
+        type:String,
+        default:'Pending'
     },
-    owner:{
-        type:mongoose.Schema.Types.ObjectId,
-        required:true,
-        ref:'User'
+    dueDate:{
+        type:Date,
+        // required:true
+    },
+    user:{
+        type:{ User },
+        required:true,      
     }
-},{
-    timestamps:true
 })
 
 const Task = mongoose.model('Task',taskSchema);
